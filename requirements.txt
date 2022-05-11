@@ -1,0 +1,10 @@
+pandas
+re
+csv
+numpy
+discord
+datetime
+requests
+urllib
+pydoc
+ast
