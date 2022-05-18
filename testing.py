@@ -1,22 +1,19 @@
-import csv
+import requests
 
-booklist = []
-prevbook = "Book Name"
-books = f""
+arg1 = input("anime name: ")
 
-with open("kjv.csv", 'r') as f:
-    mycsv = csv.reader(f)
+r = requests.get(f"https://api.myanimelist.net/v2/anime?q={arg1}&limit=10", headers={"X-MAL-CLIENT-ID":"21a5395ef35705314be29a385b38716b"})
 
-    for row in mycsv:
-        if row[1] != prevbook:
+for obj in r.json()['data']:
+        try:
+            title = obj['node']['title']
+            print(title)
 
-            booklist.append(row[1])
-            prevbook = row[1]
+        except KeyError:
+            continue  # Ignore and skip to next one.
 
-    for i, j in enumerate(booklist):
-        books += f"{i+1}){j} "
 
-    print(books)
+
 
 
         
